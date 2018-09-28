@@ -5,14 +5,14 @@ const helpers = require('../server/helpers/helpers.js');
 
 class Database {
   constructor() {
-    this.usingMLab = true;
+    this.usingMLab = false;
     this.dburi = process.env.DBURI;
     this.user = process.env.DBUSER;
     this.pw = process.env.DBPW;
     if (this.usingMLab) {
       this.dburi = `mongodb://${this.user}:${this.pw}${this.dburi}`;
     } else {
-      this.dburi = `mongodb://localhost:${process.env.DBPORT}/reviews`;
+      this.dburi = `mongodb://localhost:${process.env.DBPORT}`;
     }
 
     this.Schema = mongoose.Schema;
@@ -95,7 +95,7 @@ class Database {
   }
 
   init() {
-    mongoose.connect(this.dburi);
+    mongoose.connect('mongodb://localhost:27017/SDC');
     this.db = mongoose.connection;
     this.db.on('error', console.error.bind(console, 'db connection error:'));
     this.db.once('open', () => {
@@ -105,7 +105,7 @@ class Database {
 
   // TBD refactor in a DRY way with above
   initAndSeed() {
-    mongoose.connect(this.dburi);
+    mongoose.connect('mongodb://localhost:27017/SDC');
     this.db = mongoose.connection;
     this.db.on('error', console.error.bind(console, 'db connection error:'));
     this.db.once('open', () => {

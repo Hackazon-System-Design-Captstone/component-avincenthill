@@ -12,8 +12,10 @@
     "start": "nodemon --inspect ./server/index.js",
     "test": "jest --coverage",
     "build": "webpack",
-    "seed": "node ./database/seed.js",
-    "startprod": "node ./server/index.js"
+    "seed": "sudo node --trace_gc --inspect database/seed.js",
+    "addData": "sudo node --trace_gc --max-old-space-size=1200 database/cqlAddData.js",
+    "startprod": "node ./server/index.js",
+    "fix-memory-limit": "cross-env LIMIT=2048 increase-memory-limit"
   },
   "dependencies": {
     "@babel/core": "^7.0.1",
@@ -25,6 +27,7 @@
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.2",
     "body-parser": "^1.18.3",
+    "cassandra-driver": "^3.5.0",
     "cli": "^1.0.1",
     "cors": "^2.8.4",
     "css-loader": "^1.0.0",
@@ -36,14 +39,16 @@
     "jest": "^23.5.0",
     "jquery": "^3.3.1",
     "jquery-visible": "^1.2.0",
+    "knex": "^0.15.2",
     "math.js": "^1.1.43",
     "moment": "^2.22.2",
     "mongoose": "^5.2.13",
     "morgan": "^1.9.0",
     "nodemon": "^1.18.4",
-    "puppeteer": "^1.8.0",
+    "pg": "^7.4.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "split": "^1.0.1",
     "style-loader": "^0.23.0",
     "webpack": "^4.17.2"
   },
@@ -52,9 +57,11 @@
     "enzyme-adapter-react-16": "^1.5.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "identity-obj-proxy": "^3.0.0",
+    "increase-memory-limit": "^1.0.6",
     "jest": "^23.6.0",
     "react-test-renderer": "^16.5.0",
     "regenerator-runtime": "^0.12.1",
+    "restify": "^7.2.1",
     "webpack-cli": "^3.1.0"
   },
   "jest": {
