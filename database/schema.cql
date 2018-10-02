@@ -1,14 +1,14 @@
-DROP KEYSPACE SDC2
+DROP KEYSPACE SDC
 ;
 
-CREATE KEYSPACE SDC2
+CREATE KEYSPACE SDC
   WITH REPLICATION = { 
    'class' : 'SimpleStrategy',
    'replication_factor' : 3
-  };
+  }
 ;
 
-CREATE TABLE SDC2.reviews (
+CREATE TABLE SDC.reviews (
   productId int,
   productName text,
   reviewId int,
@@ -16,7 +16,7 @@ CREATE TABLE SDC2.reviews (
   stars int,
   title text,
   text text,
-  timestamp timestamp,
+  timestamp text,
   numHelpful int,
   verifiedPurchase boolean,
   imageUrl text,

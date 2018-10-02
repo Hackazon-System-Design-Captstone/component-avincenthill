@@ -12,8 +12,8 @@
     "start": "nodemon --inspect ./server/index.js",
     "test": "jest --coverage",
     "build": "webpack",
-    "seed": "sudo node --trace_gc --inspect database/seed.js",
-    "addData": "sudo node --trace_gc --max-old-space-size=1200 database/cqlAddData.js",
+    "seed": "sudo node --trace_gc  database/seed.js",
+    "addData": "sudo node --trace_gc database/cqlAddData.js",
     "startprod": "node ./server/index.js",
     "fix-memory-limit": "cross-env LIMIT=2048 increase-memory-limit"
   },
@@ -45,7 +45,6 @@
     "mongoose": "^5.2.13",
     "morgan": "^1.9.0",
     "nodemon": "^1.18.4",
-    "pg": "^7.4.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "split": "^1.0.1",
@@ -53,12 +52,14 @@
     "webpack": "^4.17.2"
   },
   "devDependencies": {
+    "csv-parse": "^3.1.2",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "identity-obj-proxy": "^3.0.0",
     "increase-memory-limit": "^1.0.6",
     "jest": "^23.6.0",
+    "pg": "^7.4.3",
     "react-test-renderer": "^16.5.0",
     "regenerator-runtime": "^0.12.1",
     "restify": "^7.2.1",
