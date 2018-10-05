@@ -9,8 +9,8 @@ const db = require('../database/index.js');
 
 class Server {
   constructor() {
-    this.port = process.env.SERVERPORT || 1337;
-    this.proxyPort = process.env.PROXYPORT || 3000;
+    this.port = 1337;
+    this.proxyPort = 3000;
     this.serverAddress = `http://localhost:${this.port}`;
     this.proxyAddress = `http://localhost:${this.proxyPort}`;
     this.app = express();
@@ -24,14 +24,16 @@ class Server {
     }));
     this.app.use(cors({ origin: this.proxyAddress }));
     this.app.listen(this.port);
-    console.log(`AVH component server listening on ${this.serverAddress}...`);
+    console.log(`server listening on ${this.serverAddress}...`);
 
     this.app.use(express.static('public'));
-    console.log(`AVH component server serving static react from /public on ${this.serverAddress}...`);
+    console.log(`server serving static react from /public on ${this.serverAddress}...`);
 
     this.handleGets();
     this.handlePosts();
     this.handleOptions();
+    this.handleDelete();
+    this.handlePuts();
   }
 
   handleOptions() {
@@ -62,13 +64,6 @@ class Server {
   }
 
   handlePosts() {
-    // increment the helpfulness of a review
-    this.app.post(`/reviews/*/helpful`, bodyParser.json(), (req, res) => {
-      // TBD do stuff
-      // console.log("POST to helpful");
-      res.status(202).send();
-    });
-
     // create a new review
     this.app.post(`/reviews/new`, bodyParser.json(), (req, res) => {
       // TBD do stuff
@@ -76,6 +71,33 @@ class Server {
       res.status(202).send();
     });
   }
+
+  handlePuts() {
+    this.app.put(`/reviews/update/:reviewID`, bodyParser.json(), (req, res) => {
+      let reviewId = req.params.reviewID;
+      let data = req.body;
+      console.log(data);
+      db.updateReview(data, reviewId, (err, data) => {
+        if (err) {
+          return console.error(err);
+        }
+        res.status(202).send(data);
+      });
+    });
+  }
+  
+  handleDelete() {
+    this.app.delete(`/reviews/delete/:reviewID`, bodyParser.json(), (req, res) => {
+      let reviewId = req.params.reviewID;
+      db.deleteReview(reviewId, (err, data) => {
+        if (err) {
+          return console.error(err);
+        }
+        res.status(202).send(data);
+      });
+    });
+  }
+
 }
 
 const server = new Server();

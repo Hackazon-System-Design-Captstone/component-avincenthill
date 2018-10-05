@@ -43,7 +43,7 @@ class App extends React.Component {
     };
 
     $.ajax(settings).done((data) => {
-      console.log(`A successful GET request to server returned ${data.length} review objects`);
+      //console.log(`A successful GET request to server returned ${data.length} review objects`);
       this.setState({ reviews: data });
     });
   }
@@ -62,7 +62,7 @@ class App extends React.Component {
 
     $.ajax(settings).done(() => {
       this.getReviews();
-      console.log(`A successful GET request to server incremented the helpfulness of review ${reviewId}`);
+      //console.log(`A successful GET request to server incremented the helpfulness of review ${reviewId}`);
     });
   }
 

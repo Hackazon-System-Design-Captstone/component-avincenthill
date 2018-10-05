@@ -6,15 +6,14 @@ let dataNumber = 250000;
 let drainevent = true;
 let dataFile;
 
-dataFile = fs.createWriteStream('/media/winds/Disk2/SDC/reviewData.csv');
+dataFile = fs.createWriteStream('/home/winds/Desktop/reviewData.csv');
 let writeData = (i, revId) => {
   let reviewId = revId
   let csvString = '';
   for (;i <= dataNumber; i++) {
-    let productId = Math.floor(reviewId / 5);
+    let productId = Math.ceil(reviewId / 5);
     let review = {
       productId: productId,
-      productName: "Clean-O-Bot " + productId + 1,
       reviewId: reviewId,
       username: faker.internet.userName(),
       stars: Math.floor(Math.random() * 6),
@@ -26,7 +25,7 @@ let writeData = (i, revId) => {
       imageUrl: faker.image.avatar(),
     };
     reviewId = reviewId + 1;
-    csvString += `${review.productId}|${review.productName}|${review.reviewId}|${review.username}|${review.stars}|${review.title}|${review.text}|${review.timestamp}|${review.numHelpful}|${review.verifiedPurchase}|${review.imageUrl}\n`;
+    csvString += `${review.productId}|${review.reviewId}|${review.username}|${review.stars}|${review.title}|${review.text}|${review.timestamp}|${review.numHelpful}|${review.verifiedPurchase}|${review.imageUrl}\n`;
     productId = null;
     review = null;
   }
@@ -37,13 +36,13 @@ let writeData = (i, revId) => {
       drainevent = true;
       csvString = null;
       reviewId = null;
-      console.log(Math.floor(revId/ 500000) + '% \n \n')
+      console.log(Math.floor(revId/ 500000) + '% \n')
       dataFile.once('drain', (err) => {
-        writeData(1, dataNumber * (200 - writeTimes))
+        writeData(1, dataNumber * (200 - writeTimes)+1)
       })
       return;
     }
   }
 };
   
-writeData(1, 0);
+writeData(1, 1);

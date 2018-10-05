@@ -7,7 +7,7 @@ class Review extends React.Component {
   }
 
   handleHelpfulClick() {
-    this.props.incrementHelpfulness(this.props.review.reviewId);
+    this.props.incrementHelpfulness(this.props.review.reviewid);
   }
 
   render() {
@@ -18,7 +18,7 @@ class Review extends React.Component {
       username = 'Amazon Customer';
     }
     let isVerified = '';
-    if (review.verifiedPurchase) {
+    if (review.verifiedpurchase) {
       isVerified = 'Verified Purchase';
     }
     const starArr = this.props.renderStarRating(review.stars, 1.5);
@@ -30,7 +30,7 @@ class Review extends React.Component {
           <div className={styles.grey}>{moment(review.timestamp).format('MMMM DD, YYYY')}</div>
           <a className={styles.grey}>Lorem: Ipsum 1-2</a><a className={styles.lightGreyPad}> | </a><a className={styles.orange}><b>{isVerified}</b></a>
           <p className={styles.text}>{review.text}</p>
-          <p className={styles.grey}>{review.numHelpful} people found this helpful</p>
+          <p className={styles.grey}>{review.numhelpful} people found this helpful</p>
           <div className={styles.actionContainer}>
             <button className={styles.buttonFlex} onClick={this.handleHelpfulClick.bind(this)}>Helpful</button>
             <a className={styles.lightGreyFlex}>|</a>
