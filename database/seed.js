@@ -6,7 +6,7 @@ let dataNumber = 250000;
 let drainevent = true;
 let dataFile;
 
-dataFile = fs.createWriteStream('/home/winds/Desktop/reviewData.csv');
+dataFile = fs.createWriteStream('/home/ubuntu/reviewData.csv');
 let writeData = (i, revId) => {
   let reviewId = revId
   let csvString = '';

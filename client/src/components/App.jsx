@@ -26,10 +26,11 @@ export default class App extends React.Component {
       this.setState({
         currentProductId: newCurrentProductId,
       });
-    } else if(window.location.href){
+    } else if(window.location.href.split('/').length > 3){
       console.log(window.location.href + '')
       newCurrentProductId = (window.location.href.split('/')[3]);
-    } else {
+    }
+    if (newCurrentProductId === undefined) {
       newCurrentProductId = 1;
     }
     // TBD refactor ajax request to fetch/promises/await

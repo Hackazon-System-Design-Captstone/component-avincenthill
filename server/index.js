@@ -1,7 +1,7 @@
 require('newrelic');
 require('dotenv').config();
-var compression = require('compression');
-var redis = require("redis");
+const compression = require('compression');
+const redis = require("redis");
 const bluebird = require('bluebird');
 const express = require('express');
 const morgan = require('morgan');
@@ -29,16 +29,16 @@ class Server {
   init() {
     this.app.use(compression());
     this.client = redis.createClient();
-    this.app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+    // this.app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
     this.app.use(bodyParser.urlencoded({
       extended: true,
     }));
     this.app.use(cors({ origin: this.proxyAddress }));
     this.app.listen(this.port);
-    console.log(`server listening on ${this.serverAddress}...`);
+    // console.log(`server listening on ${this.serverAddress}...`);
 
     this.app.use(express.static('public'));
-    console.log(`server serving static react from /public on ${this.serverAddress}...`);
+    // console.log(`server serving static react from /public on ${this.serverAddress}...`);
 
     this.handleGets();
     this.handleapiGets();
@@ -69,18 +69,19 @@ class Server {
   handleGets() {
     // return reviews with posted productId
     this.app.get(`/reviews/*`, bodyParser.json(), (req, res) => {
-      const productId = req.originalUrl.split('/')[2]; // get productId from from url
-      // this.client.getAsync('key '+ productId).then( (data) => {
-      //   if (data !== null) {
-      //     res.status(200).send(JSON.parse(data))
-      //   } else {
+      let productId = req.originalUrl.split('/')[2]; 
+      if (!!!productId) {productId = 1}// get productId from from url
+      this.client.getAsync('key '+ productId).then( (data) => {
+        if (data !== null) {
+          res.status(200).send(JSON.parse(data))
+        } else {
           db.getReviews(productId, (err, data) => {
             if (err) return console.error(err);
             res.status(202).send(data);
-            //this.client.setAsync('key ' + productId,  JSON.stringify(data) );
+            this.client.setAsync('key ' + productId,  JSON.stringify(data) );
           });
-      //   }
-      // });
+        }
+      });
     });
 
     // increment helpfullness
@@ -128,7 +129,7 @@ class Server {
     this.app.put(`/reviews/update/:id`, bodyParser.json(), (req, res) => {
       let reviewId = req.params.reviewID;
       let data = req.body;
-      console.log(data);
+      // console.log(data);
       db.updateReview(data, reviewId, (err, data) => {
         if (err) {
           return console.error(err);
