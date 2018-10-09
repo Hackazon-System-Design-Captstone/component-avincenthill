@@ -5,7 +5,7 @@ import Mentions from './Mentions.jsx';
 import TopReviews from './TopReviews.jsx';
 import styles from '../styles/main.css';
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,6 +26,9 @@ class App extends React.Component {
       this.setState({
         currentProductId: newCurrentProductId,
       });
+    } else if(window.location.href){
+      console.log(window.location.href + '')
+      newCurrentProductId = (window.location.href.split('/')[3]);
     } else {
       newCurrentProductId = 1;
     }
@@ -43,8 +46,12 @@ class App extends React.Component {
     };
 
     $.ajax(settings).done((data) => {
+      let daata = data;
+      if(typeof data === 'string') {
+        daata = JSON.parse(data);
+      }
       //console.log(`A successful GET request to server returned ${data.length} review objects`);
-      this.setState({ reviews: data });
+      this.setState({ reviews: daata });
     });
   }
 
@@ -56,7 +63,6 @@ class App extends React.Component {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
-        'cache-control': 'no-cache',
       },
     };
 
@@ -109,5 +115,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;

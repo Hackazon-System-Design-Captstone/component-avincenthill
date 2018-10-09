@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../styles/Mentions.css';
 
-class Mentions extends React.Component {
+export default class Mentions extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,4 +44,3 @@ class Mentions extends React.Component {
   }
 }
 
-export default Mentions;

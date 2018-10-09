@@ -1,14 +1,14 @@
 import React from 'react';
 import Review from './Review.jsx';
 import styles from '../styles/TopReviews.css';
-class TopReviews extends React.Component {
+export default class TopReviews extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     const state = this.props.getState();
-    const { reviews } = state;
+    const reviews = state.reviews;
     const reviewElements = reviews.map((review, index) => {
       // TBD toggle show reviews all on button press
       if (index < 5) {
@@ -25,5 +25,3 @@ class TopReviews extends React.Component {
     );
   }
 }
-
-export default TopReviews;

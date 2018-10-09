@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
 
-class Client {
+export default class Client {
   constructor() {
     // TBD turn this on to see individual component
     this.renderingToDOM = true;
@@ -21,5 +21,3 @@ class Client {
 }
 
 const client = new Client();
-
-export default client;

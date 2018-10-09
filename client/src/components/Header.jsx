@@ -4,7 +4,7 @@ import styles from '../styles/Header.css';
 
 require('../../../server/helpers/jquery-visible.min.js');
 
-class Header extends React.Component {
+export default class Header extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -94,7 +94,7 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+
 
 /*
 example data

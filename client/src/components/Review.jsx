@@ -1,7 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 import styles from '../styles/Review.css';
-class Review extends React.Component {
+
+export default class Review extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -27,7 +28,7 @@ class Review extends React.Component {
         <div className={styles.review}>
           <div className={styles.profileContainer}><img className={styles.profile} src='https://s3-us-west-1.amazonaws.com/avh-fec-component/img/profile.jpg'></img> {username}</div>
           <div><a className={styles.gold}><b>{starArr}</b> </a><b>{review.title}</b></div>
-          <div className={styles.grey}>{moment(review.timestamp).format('MMMM DD, YYYY')}</div>
+          <div className={styles.grey}>{review.timestamp}</div>
           <a className={styles.grey}>Lorem: Ipsum 1-2</a><a className={styles.lightGreyPad}> | </a><a className={styles.orange}><b>{isVerified}</b></a>
           <p className={styles.text}>{review.text}</p>
           <p className={styles.grey}>{review.numhelpful} people found this helpful</p>
@@ -46,7 +47,6 @@ class Review extends React.Component {
   }
 }
 
-export default Review;
 
 /*
 example data
