@@ -8,12 +8,12 @@ const client = new pg.Client({
   port: 5432,
 });
 client.connect();
-client.query(
-  `CREATE TABLE products(
-    id INTEGER PRIMARY KEY, 
-    productName VARCHAR(40) not null
-  )`
-)
+// client.query(
+//   `CREATE TABLE products(
+//     id INTEGER PRIMARY KEY, 
+//     productName VARCHAR(40) not null
+//   )`
+// )
 client.query(
   `CREATE TABLE reviews(
     idd SERIAL,
