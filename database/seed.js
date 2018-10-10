@@ -11,7 +11,7 @@ let writeData = (i, revId) => {
   let reviewId = revId
   let csvString = '';
   for (;i <= dataNumber; i++) {
-    let productId = Math.ceil(reviewId / 5);
+    let productId = Math.ceil(reviewId / 3);
     let review = {
       productId: productId,
       reviewId: reviewId,
