@@ -2,7 +2,7 @@ const faker = require('faker');
 const fs = require("fs");
  
 let writeTimes = 200
-let dataNumber = 250000;
+let dataNumber = 150000;
 let drainevent = true;
 let dataFile;
 
@@ -17,8 +17,8 @@ let writeData = (i, revId) => {
       reviewId: reviewId,
       username: faker.internet.userName(),
       stars: Math.floor(Math.random() * 6),
-      title: faker.lorem.sentence(),
-      text: faker.lorem.sentence(),
+      title: faker.lorem.word(3),
+      text: faker.lorem.word(3),
       timestamp: faker.date.past(),
       numHelpful: Math.floor(Math.random() * 10000),
       verifiedPurchase: Math.random() < 0.5,
