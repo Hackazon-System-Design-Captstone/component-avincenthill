@@ -8,7 +8,7 @@ export default class Review extends React.Component {
   }
 
   handleHelpfulClick() {
-    this.props.incrementHelpfulness(this.props.review.reviewid);
+    this.props.incrementHelpfulness(this.props.review.productid, this.props.review.idd);
   }
 
   render() {

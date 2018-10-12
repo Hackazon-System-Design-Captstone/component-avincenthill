@@ -2,7 +2,7 @@ const pg = require('pg');
 
 const client = new pg.Client({
   user: 'jun',
-  host: 'localhost',
+  host: 'ec2-54-90-167-78.compute-1.amazonaws.com',
   database: 'sdc',
   password: 'sd7763sd',
   port: 5432,
@@ -42,11 +42,10 @@ client.query(
 //   });
 // }
 
-// let incrementHelpfulness = (reviewId, cb) => {
-//   client.query(`SELECT numhelpful FROM reviews WHERE reviewid = ${reviewId}`, (err, res) => {
-//     client.query(`UPDATE reviews SET numhelpful = ${res.rows[0].numhelpful+1} WHERE reviewid = ${reviewId}`, (err, res) => {
-//       console.log(err)
-//       cb(err, res.rows);
+// let incrementHelpfulness = (idd, cb) => {
+//   client.query(`SELECT numhelpful FROM reviews WHERE idd = ${idd}`, (err, res) => {
+//     client.query(`UPDATE reviews SET numhelpful = ${res.rows[0].numhelpful+1} WHERE idd = ${idd}`, (err, result) => {
+//       cb(err, res.rows[0]);
 //     });
 //   });
 // }

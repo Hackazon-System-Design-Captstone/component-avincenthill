@@ -51,23 +51,25 @@ export default class App extends React.Component {
       if(typeof data === 'string') {
         daata = JSON.parse(data);
       }
+      console.log('get data again', dataa[0].numhelpful)
       //console.log(`A successful GET request to server returned ${data.length} review objects`);
       this.setState({ reviews: daata });
     });
   }
 
-  incrementHelpfulness(reviewId) {
+  incrementHelpfulness(productId, reviewId) {
     const settings = {
       async: true,
       crossDomain: true,
-      url: `/helpful/${reviewId}`,
+      url: `/helpful/${productId}/${reviewId}`,
       method: 'GET',
       headers: {
         'content-type': 'application/json',
       },
     };
 
-    $.ajax(settings).done(() => {
+    $.ajax(settings).done((data) => {
+      console.log(data)
       this.getReviews();
       //console.log(`A successful GET request to server incremented the helpfulness of review ${reviewId}`);
     });
